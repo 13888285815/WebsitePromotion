@@ -2479,12 +2479,11 @@
                             <div class="news-content">
                                 <p>${safeDescription}</p>
                             </div>
-                            <div class="video-player-placeholder" style="background: #000; padding: 40px; text-align: center; border-radius: 8px; margin-top: 20px;">
-                                <p style="color: white; font-size: 18px;">🎬 视频播放器</p>
-                                <p style="color: #999; font-size: 14px; margin-top: 10px;">点击播放按钮开始观看</p>
-                                <button style="margin-top: 20px; padding: 12px 30px; background: #0078d4; color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 16px;">
-                                    ▶ 播放视频
-                                </button>
+                            <div class="video-player" style="background: #000; border-radius: 8px; margin-top: 20px; overflow: hidden;">
+                                <video width="100%" height="auto" controls>
+                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                                    您的浏览器不支持视频播放。
+                                </video>
                             </div>
                         `;
                         
