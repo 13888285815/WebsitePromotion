@@ -2496,6 +2496,249 @@
         // 初始加载首页内容
         showMenuContent('首页');
 
+        // 用户行为跟踪和个性化推荐
+        const userPreferences = {
+            categories: {},
+            topics: {},
+            viewedNews: [],
+            viewedVideos: []
+        };
+
+        // 加载用户偏好数据
+        function loadUserPreferences() {
+            const savedPreferences = localStorage.getItem('userPreferences');
+            if (savedPreferences) {
+                Object.assign(userPreferences, JSON.parse(savedPreferences));
+            }
+        }
+
+        // 保存用户偏好数据
+        function saveUserPreferences() {
+            localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
+        }
+
+        // 记录用户浏览行为
+        function trackUserBehavior(type, id, category) {
+            if (type === 'news') {
+                if (!userPreferences.viewedNews.includes(id)) {
+                    userPreferences.viewedNews.push(id);
+                }
+            } else if (type === 'video') {
+                if (!userPreferences.viewedVideos.includes(id)) {
+                    userPreferences.viewedVideos.push(id);
+                }
+            }
+
+            // 记录分类偏好
+            if (category) {
+                userPreferences.categories[category] = (userPreferences.categories[category] || 0) + 1;
+            }
+
+            saveUserPreferences();
+        }
+
+        // 分析用户兴趣
+        function analyzeUserInterests() {
+            // 按分类兴趣排序
+            const sortedCategories = Object.entries(userPreferences.categories)
+                .sort((a, b) => b[1] - a[1])
+                .map(([category]) => category);
+
+            return {
+                topCategories: sortedCategories.slice(0, 3),
+                viewedCount: userPreferences.viewedNews.length + userPreferences.viewedVideos.length
+            };
+        }
+
+        // 生成个性化推荐
+        function generateRecommendations() {
+            const interests = analyzeUserInterests();
+            const recommendations = [];
+
+            // 根据用户兴趣分类推荐新闻
+            if (interests.topCategories.length > 0) {
+                interests.topCategories.forEach(category => {
+                    const categoryNews = newsData.filter(news => 
+                        news.category === category && 
+                        !userPreferences.viewedNews.includes(news.id)
+                    );
+                    
+                    recommendations.push(...categoryNews.slice(0, 2));
+                });
+            }
+
+            // 如果推荐不足，添加热门新闻
+            if (recommendations.length < 3) {
+                const hotNews = newsData
+                    .filter(news => !userPreferences.viewedNews.includes(news.id))
+                    .sort((a, b) => parseInt(b.views) - parseInt(a.views))
+                    .slice(0, 3 - recommendations.length);
+                
+                recommendations.push(...hotNews);
+            }
+
+            return recommendations;
+        }
+
+        // 显示个性化推荐
+        function showRecommendations() {
+            const recommendations = generateRecommendations();
+            const mainContent = document.querySelector('.msn-content');
+
+            if (recommendations.length === 0) {
+                return;
+            }
+
+            // 在首页添加推荐内容
+            if (mainContent.querySelector('.feature-cards')) {
+                let recommendationsHtml = `
+                    <div class="recommendations" style="margin-top: 40px;">
+                        <h2>✨ 为您推荐</h2>
+                        <div class="news-list">
+                `;
+
+                recommendations.forEach(news => {
+                    const safeTitle = escapeHtml(news.title);
+                    const safeSummary = escapeHtml(news.summary);
+                    const safeSource = escapeHtml(news.source);
+                    const safeCategory = escapeHtml(news.category);
+
+                    recommendationsHtml += `
+                        <div class="news-item">
+                            <h3><a href="#" class="news-title" data-id="${news.id}" data-category="${news.category}">${safeTitle}</a></h3>
+                            <p>${safeSummary}</p>
+                            <div class="news-meta">
+                                <span class="news-source">${safeSource}</span>
+                                <span class="news-category">${safeCategory}</span>
+                                <span class="news-time">${news.time}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                recommendationsHtml += `
+                        </div>
+                    </div>
+                `;
+
+                mainContent.insertAdjacentHTML('beforeend', recommendationsHtml);
+
+                // 重新绑定推荐新闻的点击事件
+                bindRecommendationEvents();
+            }
+        }
+
+        // 绑定推荐新闻的点击事件
+        function bindRecommendationEvents() {
+            document.querySelectorAll('.news-title').forEach(title => {
+                title.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const newsId = this.getAttribute('data-id') || (Array.from(document.querySelectorAll('.news-title')).indexOf(this) + 1).toString();
+                    const category = this.getAttribute('data-category');
+                    
+                    // 记录用户行为
+                    trackUserBehavior('news', newsId, category);
+
+                    const news = newsData.find(item => item.id === newsId);
+                    if (news) {
+                        const modal = document.getElementById('newsModal');
+                        const content = document.getElementById('newsDetailContent');
+                        
+                        // 转义新闻内容，防止 XSS 攻击
+                        const safeTitle = escapeHtml(news.title);
+                        const safeSource = escapeHtml(news.source);
+                        const safeCategory = escapeHtml(news.category);
+                        const safeContent = news.content.split('\n').map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
+                        
+                        content.innerHTML = `
+                            <h1>${safeTitle}</h1>
+                            <div class="news-meta">
+                                <span class="news-source">${safeSource}</span>
+                                <span class="news-category">${safeCategory}</span>
+                                <span class="news-time">${news.time}</span>
+                                <span class="news-views">${news.views} 阅读</span>
+                            </div>
+                            <div class="news-image">
+                                <img src="${news.imageUrl}" alt="${safeTitle}">
+                            </div>
+                            <div class="news-content">
+                                ${safeContent}
+                            </div>
+                        `;
+                        
+                        modal.style.display = 'block';
+                    }
+                });
+            });
+        }
+
+        // 绑定视频点击事件
+        function bindVideoEvents() {
+            document.querySelectorAll('.video-title').forEach(title => {
+                title.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const videoId = (Array.from(document.querySelectorAll('.video-title')).indexOf(this) + 1).toString();
+                    
+                    // 记录用户行为
+                    trackUserBehavior('video', videoId);
+
+                    const video = videoData.find(item => item.id === videoId);
+                    if (video) {
+                        const modal = document.getElementById('videoModal');
+                        const content = document.getElementById('videoDetailContent');
+                        
+                        // 转义视频内容，防止 XSS 攻击
+                        const safeTitle = escapeHtml(video.title);
+                        const safeSource = escapeHtml(video.source);
+                        const safeDescription = escapeHtml(video.description);
+                        
+                        const formatDuration = (seconds) => {
+                            const minutes = Math.floor(seconds / 60);
+                            const remainingSeconds = seconds % 60;
+                            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+                        };
+                        
+                        const formatViews = (views) => {
+                            if (views >= 1000000) {
+                                return `${(views / 1000000).toFixed(1)}M`;
+                            } else if (views >= 1000) {
+                                return `${(views / 1000).toFixed(1)}K`;
+                            }
+                            return views.toString();
+                        };
+                        
+                        content.innerHTML = `
+                            <h1>${safeTitle}</h1>
+                            <div class="news-meta">
+                                <span class="news-source">${safeSource}</span>
+                                <span class="news-category">👁 ${formatViews(video.viewCount)}</span>
+                                <span class="news-time">${video.date}</span>
+                                <span class="news-views">时长: ${formatDuration(video.duration)}</span>
+                            </div>
+                            <div class="news-image">
+                                <img src="${video.thumbnailUrl}" alt="${safeTitle}">
+                            </div>
+                            <div class="news-content">
+                                <p>${safeDescription}</p>
+                            </div>
+                            <div class="video-player" style="background: #000; border-radius: 8px; margin-top: 20px; overflow: hidden;">
+                                <video width="100%" height="auto" controls>
+                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                                    您的浏览器不支持视频播放。
+                                </video>
+                            </div>
+                        `;
+                        
+                        modal.style.display = 'block';
+                    }
+                });
+            });
+        }
+
+        // 初始化
+        loadUserPreferences();
+        setTimeout(showRecommendations, 1000); // 延迟显示推荐，确保页面已加载
+
         // 登录功能
         document.querySelector('.msn-signin').addEventListener('click', function(e) {
             e.preventDefault();
