@@ -1134,6 +1134,727 @@
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            <h2>登录</h2>
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="email">邮箱/手机号</label>
+                    <input type="text" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">记住我</label>
+                </div>
+                <button type="button" class="btn btn-primary login-btn" onclick="login()">登录</button>
+                <div class="login-options">
+                    <a href="#" onclick="showRegisterForm()">立即注册</a>
+                    <a href="#">忘记密码？</a>
+                </div>
+                <div class="login-divider">
+                    <span>或使用以下方式登录</span>
+                </div>
+                <div class="social-login">
+                    <button type="button" class="btn btn-outline social-btn"><span class="social-icon">🔷</span> 微信</button>
+                    <button type="button" class="btn btn-outline social-btn"><span class="social-icon">🔵</span> QQ</button>
+                    <button type="button" class="btn btn-outline social-btn"><span class="social-icon">📧</span> 邮箱</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 注册模态框 -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>注册</h2>
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="register-email">邮箱</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">手机号</label>
+                    <input type="tel" id="register-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">密码</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">确认密码</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                <div class="agree-terms">
+                    <input type="checkbox" id="agree" required>
+                    <label for="agree">我已阅读并同意 <a href="#">用户协议</a> 和 <a href="#">隐私政策</a></label>
+                </div>
+                <button type="button" class="btn btn-primary register-btn" onclick="register()">注册</button>
+                <div class="login-options">
+                    <a href="#" onclick="showLoginForm()">已有账号？立即登录</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 订阅模态框 -->
+    <div id="subscriptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>订阅计划</h2>
+            <div class="subscription-plans">
+                <div class="plan-card">
+                    <h3>免费版</h3>
+                    <div class="plan-price">¥0<span class="interval">/月</span></div>
+                    <ul class="plan-features">
+                        <li>基础功能访问</li>
+                        <li>每月 1000 次 API 调用</li>
+                        <li>社区支持</li>
+                        <li>有限的数据分析</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectPlan('free')">选择计划</button>
+                </div>
+                <div class="plan-card popular">
+                    <h3>专业版</h3>
+                    <div class="plan-price">¥99<span class="interval">/月</span></div>
+                    <ul class="plan-features">
+                        <li>所有免费版功能</li>
+                        <li>每月 10 万次 API 调用</li>
+                        <li>优先技术支持</li>
+                        <li>完整的数据分析</li>
+                        <li>无广告体验</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectPlan('pro')">选择计划</button>
+                </div>
+                <div class="plan-card">
+                    <h3>企业版</h3>
+                    <div class="plan-price">¥999<span class="interval">/月</span></div>
+                    <ul class="plan-features">
+                        <li>所有专业版功能</li>
+                        <li>无限 API 调用</li>
+                        <li>24/7 技术支持</li>
+                        <li>高级数据分析</li>
+                        <li>定制化解决方案</li>
+                        <li>专属客户经理</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectPlan('enterprise')">选择计划</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 支付模态框 -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>选择支付方式</h2>
+            <div class="payment-methods">
+                <h3>请选择支付方式</h3>
+                <div class="payment-options">
+                    <div class="payment-option" onclick="selectPayment('wechat')">
+                        <div class="payment-icon">💚</div>
+                        <div class="payment-name">微信支付</div>
+                        <div class="payment-description">快捷安全</div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('alipay')">
+                        <div class="payment-icon">🔵</div>
+                        <div class="payment-name">支付宝</div>
+                        <div class="payment-description">方便快捷</div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('unionpay')">
+                        <div class="payment-icon">🔴</div>
+                        <div class="payment-name">银联</div>
+                        <div class="payment-description">银行卡支付</div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('creditcard')">
+                        <div class="payment-icon">💳</div>
+                        <div class="payment-name">信用卡</div>
+                        <div class="payment-description">Visa/Mastercard</div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" onclick="payNow()">立即支付</button>
+        </div>
+    </div>
+    
+    <!-- API Tokens 模态框 -->
+    <div id="apiTokensModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>API Tokens</h2>
+            <div class="api-tokens">
+                <div class="token-item">
+                    <div class="token-info">
+                        <div class="token-name">默认 Token</div>
+                        <div class="token-value">sk-abcdef1234567890</div>
+                        <div class="token-meta">创建于 2026-03-25 | 上次使用 2026-03-26</div>
+                    </div>
+                    <div class="token-actions">
+                        <button class="btn btn-outline">刷新</button>
+                        <button class="btn btn-outline">删除</button>
+                    </div>
+                </div>
+                <div class="token-item">
+                    <div class="token-info">
+                        <div class="token-name">测试 Token</div>
+                        <div class="token-value">sk-ghijkl1234567890</div>
+                        <div class="token-meta">创建于 2026-03-20 | 上次使用 2026-03-25</div>
+                    </div>
+                    <div class="token-actions">
+                        <button class="btn btn-outline">刷新</button>
+                        <button class="btn btn-outline">删除</button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary add-token" onclick="addToken()">添加新 Token</button>
+        </div>
+    </div>
+    
+    <!-- 主题切换按钮 -->
+    <button id="themeToggle" title="切换主题">🌙</button>
+    
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // 检查本地存储中的主题偏好
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+        
+        // 模态框功能
+        const modals = {
+            news: document.getElementById('newsModal'),
+            video: document.getElementById('videoModal'),
+            login: document.getElementById('loginModal'),
+            register: document.getElementById('registerModal'),
+            subscription: document.getElementById('subscriptionModal'),
+            payment: document.getElementById('paymentModal'),
+            apiTokens: document.getElementById('apiTokensModal')
+        };
+        
+        // 关闭模态框
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', () => {
+                Object.values(modals).forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            });
+        });
+        
+        // 点击模态框外部关闭
+        window.addEventListener('click', (e) => {
+            Object.values(modals).forEach(modal => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+        
+        // 新闻数据
+        const newsData = [
+            {
+                id: 1,
+                title: 'Windows 11 2026 年大更新正式发布，带来全新界面和功能',
+                summary: '微软今天发布了 Windows 11 的重大更新，带来了全新的开始菜单设计、改进的任务栏和更多生产力功能。',
+                content: '<p>微软今天正式发布了 Windows 11 的 2026 年重大更新，这是自 Windows 11 发布以来最大的一次更新。</p><p>本次更新带来了全新的开始菜单设计，采用了更现代化的外观和更智能的布局。任务栏也得到了改进，支持更多的个性化选项和更便捷的操作方式。</p><p>此外，本次更新还增强了生产力功能，包括改进的文件资源管理器、更强大的多任务处理能力，以及与 Microsoft 365 更深度的集成。</p><p>Windows 11 2026 年更新将于下月开始向全球用户推送，用户可以通过 Windows 更新中心获取。</p>',
+                image: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Windows%2011%20update%20new%20features%20screenshot&image_size=landscape_16_9',
+                source: '微软官方',
+                category: '科技',
+                time: '2026-03-25 10:00',
+                views: '12,456'
+            },
+            {
+                id: 2,
+                title: '人工智能技术新突破：GPT-5 模型发布，性能提升 10 倍',
+                summary: 'OpenAI 今天发布了 GPT-5 模型，声称其性能比 GPT-4 提升了 10 倍，能够处理更复杂的任务。',
+                content: '<p>OpenAI 今天正式发布了备受期待的 GPT-5 模型，这是该公司最新的大型语言模型。</p><p>据 OpenAI 介绍，GPT-5 的性能比 GPT-4 提升了 10 倍，能够处理更复杂的任务，包括更准确的自然语言理解、更流畅的对话能力，以及更强的逻辑推理能力。</p><p>GPT-5 还支持多模态输入和输出，能够同时处理文本、图像、音频和视频等多种形式的信息。</p><p>OpenAI 表示，GPT-5 将首先通过 API 向企业客户开放，随后会逐步向个人用户提供访问权限。</p>',
+                image: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=latest%20AI%20technology%20advancements&image_size=landscape_16_9',
+                source: '科技日报',
+                category: '科技',
+                time: '2026-03-25 09:30',
+                views: '23,789'
+            },
+            {
+                id: 3,
+                title: '2026 年第一季度新能源汽车销量同比增长 45%',
+                summary: '根据最新数据，2026 年第一季度全球新能源汽车销量达到 320 万辆，同比增长 45%。',
+                content: '<p>根据全球汽车市场研究机构的最新数据，2026 年第一季度全球新能源汽车销量达到 320 万辆，同比增长 45%。</p><p>其中，中国市场依然是新能源汽车的主要增长动力，第一季度销量达到 180 万辆，同比增长 52%。欧洲和北美市场也保持了强劲的增长势头，分别增长了 38% 和 41%。</p><p>从品牌来看，特斯拉、比亚迪、大众等品牌的新能源汽车销量位居前列。特别是中国品牌的表现尤为突出，比亚迪、蔚来、小鹏等品牌的全球销量都有显著增长。</p><p>分析师预计，2026 年全球新能源汽车销量有望突破 1200 万辆，市场份额将超过传统燃油车。</p>',
+                image: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=electric%20vehicles%20future%20technology&image_size=landscape_16_9',
+                source: '汽车之家',
+                category: '财经',
+                time: '2026-03-25 08:45',
+                views: '9,876'
+            },
+            {
+                id: 4,
+                title: '国足世预赛首战告捷，2-0 战胜对手',
+                summary: '在今天进行的世界杯预选赛中，国足凭借出色的表现，以 2-0 战胜对手，取得开门红。',
+                content: '<p>在今天进行的 2026 年世界杯预选赛亚洲区比赛中，中国国家男子足球队凭借出色的表现，以 2-0 战胜对手，取得了预选赛的开门红。</p><p>比赛中，国足队员展现出了良好的团队配合和个人技术，在上半场第 35 分钟由队长打入首球，下半场第 78 分钟再入一球，锁定胜局。</p><p>赛后，主教练表示，球队在赛前做了充分的准备，队员们在比赛中执行战术非常坚决，希望能够保持这种状态，在接下来的比赛中取得更好的成绩。</p><p>国足的下一场比赛将于下周二进行，对手是亚洲另一支强队。</p>',
+                image: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=sports%20event%20football%20match&image_size=landscape_16_9',
+                source: '体育新闻',
+                category: '体育',
+                time: '2026-03-24 22:00',
+                views: '15,678'
+            },
+            {
+                id: 5,
+                title: '第 98 届奥斯卡颁奖典礼举行，《奥本海默》获最佳影片',
+                summary: '第 98 届奥斯卡颁奖典礼在洛杉矶举行，《奥本海默》获得最佳影片等多项大奖。',
+                content: '<p>第 98 届奥斯卡颁奖典礼于当地时间 3 月 24 日在洛杉矶杜比剧院举行，克里斯托弗·诺兰执导的《奥本海默》获得了最佳影片、最佳导演、最佳男主角等多项大奖。</p><p>《奥本海默》讲述了“原子弹之父”罗伯特·奥本海默的传奇一生，影片以其出色的叙事、精湛的表演和震撼的视觉效果获得了评委和观众的一致好评。</p><p>此外，《可怜的东西》获得了最佳女主角、最佳服装设计等奖项，《坠落的审判》获得了最佳原创剧本奖。</p><p>本届奥斯卡颁奖典礼还特别致敬了多位电影界的传奇人物，包括已故的演员和导演。</p>',
+                image: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=entertainment%20industry%20awards%20ceremony&image_size=landscape_16_9',
+                source: '娱乐周刊',
+                category: '娱乐',
+                time: '2026-03-24 12:00',
+                views: '8,765'
+            },
+            {
+                id: 6,
+                title: '研究表明：每天步行 8000 步可显著降低心脏病风险',
+                summary: '一项最新研究表明，每天步行 8000 步可以显著降低心脏病和中风的风险。',
+                content: '<p>一项发表在《美国心脏协会杂志》上的最新研究表明，每天步行 8000 步可以显著降低心脏病和中风的风险。</p><p>研究人员对超过 10 万名参与者进行了为期 10 年的跟踪调查，结果发现，与每天步行少于 4000 步的人相比，每天步行 8000 步的人患心脏病和中风的风险降低了 51%。</p><p>研究还发现，即使每天步行 4000-7999 步，也能显著降低心脏病和中风的风险，降低幅度为 32%。</p><p>研究人员建议，成年人应该每天至少步行 8000 步，以保持心血管健康。对于那些难以达到这个目标的人，即使增加少量的步行也能带来健康益处。</p>',
+                image: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=health%20lifestyle%20wellness&image_size=landscape_16_9',
+                source: '健康时报',
+                category: '健康',
+                time: '2026-03-24 10:00',
+                views: '6,543'
+            }
+        ];
+        
+        // 视频数据
+        const videoData = [
+            {
+                id: 1,
+                title: '2026 年 AI 技术发展回顾：从 GPT-4 到 GPT-5',
+                description: '回顾过去一年 AI 技术的重大突破，从 GPT-4 到 GPT-5 的演变历程。',
+                thumbnail: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=technology%20review%20video%20thumbnail&image_size=landscape_16_9',
+                duration: '10:24',
+                source: '科技频道',
+                views: '24.5 万次观看',
+                date: '2026-03-25',
+                videoUrl: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4'
+            },
+            {
+                id: 2,
+                title: '国足世预赛首战精彩集锦：两粒精彩进球锁定胜局',
+                description: '回顾国足世预赛首战的精彩瞬间，两粒精彩进球帮助球队取得开门红。',
+                thumbnail: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=sports%20highlight%20video%20thumbnail&image_size=landscape_16_9',
+                duration: '5:45',
+                source: '体育频道',
+                views: '18.2 万次观看',
+                date: '2026-03-24',
+                videoUrl: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4'
+            },
+            {
+                id: 3,
+                title: '健康生活小贴士：如何保持良好的睡眠质量',
+                description: '专家分享保持良好睡眠质量的实用技巧，帮助你拥有健康的睡眠习惯。',
+                thumbnail: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=health%20tips%20video%20thumbnail&image_size=landscape_16_9',
+                duration: '8:12',
+                source: '健康频道',
+                views: '12.7 万次观看',
+                date: '2026-03-23',
+                videoUrl: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4'
+            }
+        ];
+        
+        // 搜索功能
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        document.querySelector('.msn-search button').addEventListener('click', search);
+        document.querySelector('.msn-search input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                search();
+            }
+        });
+        
+        function search() {
+            const searchTerm = document.querySelector('.msn-search input').value.toLowerCase();
+            if (!searchTerm) {
+                alert('请输入搜索关键词');
+                return;
+            }
+            
+            // 搜索新闻
+            const newsResults = newsData.filter(news => 
+                news.title.toLowerCase().includes(searchTerm) || 
+                news.summary.toLowerCase().includes(searchTerm) ||
+                news.content.toLowerCase().includes(searchTerm) ||
+                news.category.toLowerCase().includes(searchTerm)
+            );
+            
+            // 搜索视频
+            const videoResults = videoData.filter(video => 
+                video.title.toLowerCase().includes(searchTerm) || 
+                video.description.toLowerCase().includes(searchTerm) ||
+                video.source.toLowerCase().includes(searchTerm)
+            );
+            
+            // 显示搜索结果
+            let resultsHTML = `<h2>搜索结果: "${escapeHtml(searchTerm)}"</h2>`;
+            
+            if (newsResults.length > 0) {
+                resultsHTML += '<h3>新闻结果</h3>';
+                resultsHTML += '<div class="news-list">';
+                newsResults.forEach(news => {
+                    resultsHTML += `
+                        <div class="news-item">
+                            <h3><a href="#" onclick="showNewsDetail(${news.id})">${escapeHtml(news.title)}</a></h3>
+                            <p>${escapeHtml(news.summary)}</p>
+                            <div class="news-meta">
+                                <span class="news-source">${escapeHtml(news.source)}</span>
+                                <span class="news-category">${escapeHtml(news.category)}</span>
+                                <span class="news-time">${escapeHtml(news.time)}</span>
+                                <span class="news-views">${escapeHtml(news.views)} 阅读</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                resultsHTML += '</div>';
+            }
+            
+            if (videoResults.length > 0) {
+                resultsHTML += '<h3>视频结果</h3>';
+                resultsHTML += '<div class="video-list">';
+                videoResults.forEach(video => {
+                    resultsHTML += `
+                        <div class="video-item">
+                            <h3><a href="#" onclick="showVideoDetail(${video.id})">${escapeHtml(video.title)}</a></h3>
+                            <p>${escapeHtml(video.description)}</p>
+                            <div class="video-meta">
+                                <span class="video-source">${escapeHtml(video.source)}</span>
+                                <span class="video-views">${escapeHtml(video.views)}</span>
+                                <span class="video-date">${escapeHtml(video.date)}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                resultsHTML += '</div>';
+            }
+            
+            if (newsResults.length === 0 && videoResults.length === 0) {
+                resultsHTML += '<p>没有找到相关结果，请尝试其他关键词。</p>';
+            }
+            
+            document.querySelector('.msn-content').innerHTML = resultsHTML;
+        }
+        
+        // 显示新闻详情
+        function showNewsDetail(id) {
+            const news = newsData.find(n => n.id === id);
+            if (!news) return;
+            
+            const newsDetailContent = document.getElementById('newsDetailContent');
+            newsDetailContent.innerHTML = `
+                <h1>${escapeHtml(news.title)}</h1>
+                <div class="news-meta">
+                    <span class="news-source">${escapeHtml(news.source)}</span>
+                    <span class="news-category">${escapeHtml(news.category)}</span>
+                    <span class="news-time">${escapeHtml(news.time)}</span>
+                    <span class="news-views">${escapeHtml(news.views)} 阅读</span>
+                </div>
+                <div class="news-image">
+                    <img src="${news.image}" alt="${escapeHtml(news.title)}" loading="lazy">
+                </div>
+                <div class="news-content">
+                    ${news.content}
+                </div>
+            `;
+            
+            modals.news.style.display = 'block';
+            
+            // 记录用户行为
+            trackUserBehavior('news', id);
+        }
+        
+        // 显示视频详情
+        function showVideoDetail(id) {
+            const video = videoData.find(v => v.id === id);
+            if (!video) return;
+            
+            const videoDetailContent = document.getElementById('videoDetailContent');
+            videoDetailContent.innerHTML = `
+                <h1>${escapeHtml(video.title)}</h1>
+                <div class="video-meta">
+                    <span class="video-source">${escapeHtml(video.source)}</span>
+                    <span class="video-views">${escapeHtml(video.views)}</span>
+                    <span class="video-date">${escapeHtml(video.date)}</span>
+                </div>
+                <div class="video-player">
+                    <video controls>
+                        <source src="${video.videoUrl}" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                </div>
+                <p>${escapeHtml(video.description)}</p>
+            `;
+            
+            modals.video.style.display = 'block';
+            
+            // 记录用户行为
+            trackUserBehavior('video', id);
+        }
+        
+        // 显示登录表单
+        document.querySelector('.msn-signin').addEventListener('click', (e) => {
+            e.preventDefault();
+            modals.login.style.display = 'block';
+        });
+        
+        // 显示注册表单
+        function showRegisterForm() {
+            modals.login.style.display = 'none';
+            modals.register.style.display = 'block';
+        }
+        
+        // 显示登录表单
+        function showLoginForm() {
+            modals.register.style.display = 'none';
+            modals.login.style.display = 'block';
+        }
+        
+        // 登录功能
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                alert('请填写所有必填字段');
+                return;
+            }
+            
+            // 模拟登录成功
+            alert('登录成功！');
+            modals.login.style.display = 'none';
+        }
+        
+        // 注册功能
+        function register() {
+            const email = document.getElementById('register-email').value;
+            const phone = document.getElementById('register-phone').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const agree = document.getElementById('agree').checked;
+            
+            if (!email || !phone || !password || !confirmPassword || !agree) {
+                alert('请填写所有必填字段并同意用户协议');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('两次输入的密码不一致');
+                return;
+            }
+            
+            // 模拟注册成功
+            alert('注册成功！');
+            modals.register.style.display = 'none';
+            modals.login.style.display = 'block';
+        }
+        
+        // 订阅功能
+        function showSubscription() {
+            modals.subscription.style.display = 'block';
+        }
+        
+        // 选择订阅计划
+        function selectPlan(plan) {
+            alert(`您选择了 ${plan === 'free' ? '免费' : plan === 'pro' ? '专业' : '企业'} 版计划`);
+            modals.subscription.style.display = 'none';
+            modals.payment.style.display = 'block';
+        }
+        
+        // 选择支付方式
+        function selectPayment(method) {
+            // 移除其他选中状态
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            // 添加选中状态
+            event.currentTarget.classList.add('selected');
+        }
+        
+        // 立即支付
+        function payNow() {
+            const selectedPayment = document.querySelector('.payment-option.selected');
+            if (!selectedPayment) {
+                alert('请选择支付方式');
+                return;
+            }
+            
+            // 模拟支付成功
+            alert('支付成功！您的订阅已激活。');
+            modals.payment.style.display = 'none';
+        }
+        
+        // API Tokens 功能
+        function showApiTokens() {
+            modals.apiTokens.style.display = 'block';
+        }
+        
+        // 添加新 Token
+        function addToken() {
+            alert('新 Token 已生成：sk-newtoken1234567890');
+        }
+        
+        // 显示热门话题
+        function showTrendingTopic(topic) {
+            const topics = {
+                ai: 'AI 人工智能',
+                cloud: '云计算技术',
+                ev: '新能源汽车',
+                metaverse: '元宇宙探索',
+                blockchain: '区块链应用'
+            };
+            
+            let topicContent = `<h2>${topics[topic]}</h2>`;
+            
+            // 根据话题显示相关内容
+            switch (topic) {
+                case 'ai':
+                    topicContent += '<p>人工智能技术正在快速发展，GPT-5、Claude 3 等模型不断刷新我们对 AI 能力的认知。</p><p>AI 在医疗、教育、金融等领域的应用也越来越广泛，为各行各业带来了革命性的变化。</p>';
+                    break;
+                case 'cloud':
+                    topicContent += '<p>云计算技术已经成为企业数字化转型的核心基础设施，各大云服务商不断推出新的服务和解决方案。</p><p>边缘计算、混合云等新技术的出现，为云计算带来了更多可能性。</p>';
+                    break;
+                case 'ev':
+                    topicContent += '<p>新能源汽车市场持续火爆，各大厂商纷纷推出新车型，电池技术也在不断突破。</p><p>自动驾驶技术的发展，为新能源汽车行业带来了新的增长点。</p>';
+                    break;
+                case 'metaverse':
+                    topicContent += '<p>元宇宙概念正在从概念走向现实，各大科技公司纷纷布局元宇宙生态。</p><p>VR/AR 技术的发展，为元宇宙的实现提供了技术基础。</p>';
+                    break;
+                case 'blockchain':
+                    topicContent += '<p>区块链技术在金融、供应链、数字身份等领域的应用不断深入。</p><p>Web3.0 的发展，为区块链技术带来了新的应用场景。</p>';
+                    break;
+            }
+            
+            document.querySelector('.msn-content').innerHTML = topicContent;
+        }
+        
+        // 导航菜单功能
+        document.querySelectorAll('.msn-nav ul li a').forEach((link, index) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // 移除所有激活状态
+                document.querySelectorAll('.msn-nav ul li').forEach(li => {
+                    li.classList.remove('active');
+                });
+                
+                // 添加当前激活状态
+                link.parentElement.classList.add('active');
+                
+                // 显示对应内容
+                const menuItems = ['首页', '新闻', '视频', '体育', '财经', '娱乐', '科技', '生活', '健康', '更多'];
+                const currentMenu = menuItems[index];
+                
+                let contentHTML = '';
+                
+                switch (currentMenu) {
+                    case '首页':
+                        window.location.reload();
+                        return;
+                    case '新闻':
+                        contentHTML = '<h2>新闻</h2><p>这里是新闻内容。</p>';
+                        break;
+                    case '视频':
+                        contentHTML = '<h2>视频</h2><p>这里是视频内容。</p>';
+                        break;
+                    case '体育':
+                        contentHTML = '<h2>体育</h2><p>这里是体育新闻。</p>';
+                        break;
+                    case '财经':
+                        contentHTML = '<h2>财经</h2><p>这里是财经资讯。</p>';
+                        break;
+                    case '娱乐':
+                        contentHTML = '<h2>娱乐</h2><p>这里是娱乐新闻。</p>';
+                        break;
+                    case '科技':
+                        contentHTML = '<h2>科技</h2><p>这里是科技新闻。</p>';
+                        break;
+                    case '生活':
+                        contentHTML = '<h2>生活</h2><p>这里是生活资讯。</p>';
+                        break;
+                    case '健康':
+                        contentHTML = '<h2>健康</h2><p>这里是健康资讯。</p>';
+                        break;
+                    case '更多':
+                        contentHTML = '<h2>更多</h2><div class="more-content"><div class="content-item"><h3>订阅</h3><p>选择适合您的订阅计划</p><button class="btn btn-primary" onclick="showSubscription()">查看订阅</button></div><div class="content-item"><h3>API Tokens</h3><p>管理您的 API 令牌</p><button class="btn btn-primary" onclick="showApiTokens()">管理 Tokens</button></div></div>';
+                        break;
+                }
+                
+                document.querySelector('.msn-content').innerHTML = contentHTML;
+            });
+        });
+        
+        // 用户行为跟踪和个性化推荐
+        function trackUserBehavior(type, id) {
+            // 获取用户兴趣数据
+            let userInterests = JSON.parse(localStorage.getItem('userInterests') || '{}');
+            
+            // 更新兴趣数据
+            if (type === 'news') {
+                const news = newsData.find(n => n.id === id);
+                if (news) {
+                    userInterests[news.category] = (userInterests[news.category] || 0) + 1;
+                }
+            } else if (type === 'video') {
+                const video = videoData.find(v => v.id === id);
+                if (video) {
+                    userInterests[video.source] = (userInterests[video.source] || 0) + 1;
+                }
+            }
+            
+            // 保存兴趣数据
+            localStorage.setItem('userInterests', JSON.stringify(userInterests));
+            
+            // 更新推荐内容
+            updateRecommendations();
+        }
+        
+        // 更新推荐内容
+        function updateRecommendations() {
+            const userInterests = JSON.parse(localStorage.getItem('userInterests') || '{}');
+            
+            // 找到用户最感兴趣的类别
+            let topInterest = null;
+            let maxCount = 0;
+            
+            for (const [category, count] of Object.entries(userInterests)) {
+                if (count > maxCount) {
+                    maxCount = count;
+                    topInterest = category;
+                }
+            }
+            
+            if (topInterest) {
+                // 根据用户兴趣更新推荐内容
+                console.log(`用户最感兴趣的类别：${topInterest}`);
+                // 这里可以根据用户兴趣更新推荐内容
+            }
+        }
+        
+        // 初始化推荐内容
+        updateRecommendations();
+    </script>
+</body>
+</html>
             <h2>用户登录</h2>
             <div class="login-form">
                 <div class="form-group">
@@ -2495,249 +3216,6 @@
 
         // 初始加载首页内容
         showMenuContent('首页');
-
-        // 用户行为跟踪和个性化推荐
-        const userPreferences = {
-            categories: {},
-            topics: {},
-            viewedNews: [],
-            viewedVideos: []
-        };
-
-        // 加载用户偏好数据
-        function loadUserPreferences() {
-            const savedPreferences = localStorage.getItem('userPreferences');
-            if (savedPreferences) {
-                Object.assign(userPreferences, JSON.parse(savedPreferences));
-            }
-        }
-
-        // 保存用户偏好数据
-        function saveUserPreferences() {
-            localStorage.setItem('userPreferences', JSON.stringify(userPreferences));
-        }
-
-        // 记录用户浏览行为
-        function trackUserBehavior(type, id, category) {
-            if (type === 'news') {
-                if (!userPreferences.viewedNews.includes(id)) {
-                    userPreferences.viewedNews.push(id);
-                }
-            } else if (type === 'video') {
-                if (!userPreferences.viewedVideos.includes(id)) {
-                    userPreferences.viewedVideos.push(id);
-                }
-            }
-
-            // 记录分类偏好
-            if (category) {
-                userPreferences.categories[category] = (userPreferences.categories[category] || 0) + 1;
-            }
-
-            saveUserPreferences();
-        }
-
-        // 分析用户兴趣
-        function analyzeUserInterests() {
-            // 按分类兴趣排序
-            const sortedCategories = Object.entries(userPreferences.categories)
-                .sort((a, b) => b[1] - a[1])
-                .map(([category]) => category);
-
-            return {
-                topCategories: sortedCategories.slice(0, 3),
-                viewedCount: userPreferences.viewedNews.length + userPreferences.viewedVideos.length
-            };
-        }
-
-        // 生成个性化推荐
-        function generateRecommendations() {
-            const interests = analyzeUserInterests();
-            const recommendations = [];
-
-            // 根据用户兴趣分类推荐新闻
-            if (interests.topCategories.length > 0) {
-                interests.topCategories.forEach(category => {
-                    const categoryNews = newsData.filter(news => 
-                        news.category === category && 
-                        !userPreferences.viewedNews.includes(news.id)
-                    );
-                    
-                    recommendations.push(...categoryNews.slice(0, 2));
-                });
-            }
-
-            // 如果推荐不足，添加热门新闻
-            if (recommendations.length < 3) {
-                const hotNews = newsData
-                    .filter(news => !userPreferences.viewedNews.includes(news.id))
-                    .sort((a, b) => parseInt(b.views) - parseInt(a.views))
-                    .slice(0, 3 - recommendations.length);
-                
-                recommendations.push(...hotNews);
-            }
-
-            return recommendations;
-        }
-
-        // 显示个性化推荐
-        function showRecommendations() {
-            const recommendations = generateRecommendations();
-            const mainContent = document.querySelector('.msn-content');
-
-            if (recommendations.length === 0) {
-                return;
-            }
-
-            // 在首页添加推荐内容
-            if (mainContent.querySelector('.feature-cards')) {
-                let recommendationsHtml = `
-                    <div class="recommendations" style="margin-top: 40px;">
-                        <h2>✨ 为您推荐</h2>
-                        <div class="news-list">
-                `;
-
-                recommendations.forEach(news => {
-                    const safeTitle = escapeHtml(news.title);
-                    const safeSummary = escapeHtml(news.summary);
-                    const safeSource = escapeHtml(news.source);
-                    const safeCategory = escapeHtml(news.category);
-
-                    recommendationsHtml += `
-                        <div class="news-item">
-                            <h3><a href="#" class="news-title" data-id="${news.id}" data-category="${news.category}">${safeTitle}</a></h3>
-                            <p>${safeSummary}</p>
-                            <div class="news-meta">
-                                <span class="news-source">${safeSource}</span>
-                                <span class="news-category">${safeCategory}</span>
-                                <span class="news-time">${news.time}</span>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                recommendationsHtml += `
-                        </div>
-                    </div>
-                `;
-
-                mainContent.insertAdjacentHTML('beforeend', recommendationsHtml);
-
-                // 重新绑定推荐新闻的点击事件
-                bindRecommendationEvents();
-            }
-        }
-
-        // 绑定推荐新闻的点击事件
-        function bindRecommendationEvents() {
-            document.querySelectorAll('.news-title').forEach(title => {
-                title.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const newsId = this.getAttribute('data-id') || (Array.from(document.querySelectorAll('.news-title')).indexOf(this) + 1).toString();
-                    const category = this.getAttribute('data-category');
-                    
-                    // 记录用户行为
-                    trackUserBehavior('news', newsId, category);
-
-                    const news = newsData.find(item => item.id === newsId);
-                    if (news) {
-                        const modal = document.getElementById('newsModal');
-                        const content = document.getElementById('newsDetailContent');
-                        
-                        // 转义新闻内容，防止 XSS 攻击
-                        const safeTitle = escapeHtml(news.title);
-                        const safeSource = escapeHtml(news.source);
-                        const safeCategory = escapeHtml(news.category);
-                        const safeContent = news.content.split('\n').map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
-                        
-                        content.innerHTML = `
-                            <h1>${safeTitle}</h1>
-                            <div class="news-meta">
-                                <span class="news-source">${safeSource}</span>
-                                <span class="news-category">${safeCategory}</span>
-                                <span class="news-time">${news.time}</span>
-                                <span class="news-views">${news.views} 阅读</span>
-                            </div>
-                            <div class="news-image">
-                                <img src="${news.imageUrl}" alt="${safeTitle}">
-                            </div>
-                            <div class="news-content">
-                                ${safeContent}
-                            </div>
-                        `;
-                        
-                        modal.style.display = 'block';
-                    }
-                });
-            });
-        }
-
-        // 绑定视频点击事件
-        function bindVideoEvents() {
-            document.querySelectorAll('.video-title').forEach(title => {
-                title.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const videoId = (Array.from(document.querySelectorAll('.video-title')).indexOf(this) + 1).toString();
-                    
-                    // 记录用户行为
-                    trackUserBehavior('video', videoId);
-
-                    const video = videoData.find(item => item.id === videoId);
-                    if (video) {
-                        const modal = document.getElementById('videoModal');
-                        const content = document.getElementById('videoDetailContent');
-                        
-                        // 转义视频内容，防止 XSS 攻击
-                        const safeTitle = escapeHtml(video.title);
-                        const safeSource = escapeHtml(video.source);
-                        const safeDescription = escapeHtml(video.description);
-                        
-                        const formatDuration = (seconds) => {
-                            const minutes = Math.floor(seconds / 60);
-                            const remainingSeconds = seconds % 60;
-                            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-                        };
-                        
-                        const formatViews = (views) => {
-                            if (views >= 1000000) {
-                                return `${(views / 1000000).toFixed(1)}M`;
-                            } else if (views >= 1000) {
-                                return `${(views / 1000).toFixed(1)}K`;
-                            }
-                            return views.toString();
-                        };
-                        
-                        content.innerHTML = `
-                            <h1>${safeTitle}</h1>
-                            <div class="news-meta">
-                                <span class="news-source">${safeSource}</span>
-                                <span class="news-category">👁 ${formatViews(video.viewCount)}</span>
-                                <span class="news-time">${video.date}</span>
-                                <span class="news-views">时长: ${formatDuration(video.duration)}</span>
-                            </div>
-                            <div class="news-image">
-                                <img src="${video.thumbnailUrl}" alt="${safeTitle}">
-                            </div>
-                            <div class="news-content">
-                                <p>${safeDescription}</p>
-                            </div>
-                            <div class="video-player" style="background: #000; border-radius: 8px; margin-top: 20px; overflow: hidden;">
-                                <video width="100%" height="auto" controls>
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                                    您的浏览器不支持视频播放。
-                                </video>
-                            </div>
-                        `;
-                        
-                        modal.style.display = 'block';
-                    }
-                });
-            });
-        }
-
-        // 初始化
-        loadUserPreferences();
-        setTimeout(showRecommendations, 1000); // 延迟显示推荐，确保页面已加载
 
         // 登录功能
         document.querySelector('.msn-signin').addEventListener('click', function(e) {
