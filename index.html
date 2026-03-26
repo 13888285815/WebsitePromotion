@@ -26,6 +26,11 @@
     
     <!-- 主题颜色 -->
     <meta name="theme-color" content="#0078d4">
+    <!-- 安全头部 -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://trae-api-cn.mchost.guru; font-src https://fonts.gstatic.com; connect-src 'self'; frame-src 'none';">
     <!-- 预加载关键资源 -->
     <link rel="preload" href="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Windows%2011%20update%20new%20features%20screenshot&image_size=landscape_16_9" as="image">
     
@@ -1461,6 +1466,16 @@
             }
         ];
 
+        // HTML 转义函数，防止 XSS 攻击
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
         // 搜索功能
         document.querySelector('.msn-search button').addEventListener('click', function() {
             const searchInput = document.querySelector('.msn-search input');
@@ -1485,7 +1500,9 @@
                 const modal = document.getElementById('newsModal');
                 const content = document.getElementById('newsDetailContent');
                 
-                let resultsHtml = `<h1>搜索结果: "${searchInput.value}"</h1>`;
+                // 转义搜索词，防止 XSS 攻击
+                const safeSearchTerm = escapeHtml(searchInput.value);
+                let resultsHtml = `<h1>搜索结果: "${safeSearchTerm}"</h1>`;
                 resultsHtml += `<p style="margin: 10px 0 20px; color: #666;">找到 ${newsResults.length} 条新闻和 ${videoResults.length} 个视频</p>`;
                 
                 if (newsResults.length > 0) {
@@ -1553,19 +1570,25 @@
                     const modal = document.getElementById('newsModal');
                     const content = document.getElementById('newsDetailContent');
                     
+                    // 转义新闻内容，防止 XSS 攻击
+                    const safeTitle = escapeHtml(news.title);
+                    const safeSource = escapeHtml(news.source);
+                    const safeCategory = escapeHtml(news.category);
+                    const safeContent = news.content.split('\n').map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
+                    
                     content.innerHTML = `
-                        <h1>${news.title}</h1>
+                        <h1>${safeTitle}</h1>
                         <div class="news-meta">
-                            <span class="news-source">${news.source}</span>
-                            <span class="news-category">${news.category}</span>
+                            <span class="news-source">${safeSource}</span>
+                            <span class="news-category">${safeCategory}</span>
                             <span class="news-time">${news.time}</span>
                             <span class="news-views">${news.views} 阅读</span>
                         </div>
                         <div class="news-image">
-                            <img src="${news.imageUrl}" alt="${news.title}">
+                            <img src="${news.imageUrl}" alt="${safeTitle}">
                         </div>
                         <div class="news-content">
-                            ${news.content.split('\n').map(paragraph => `<p>${paragraph}</p>`).join('')}
+                            ${safeContent}
                         </div>
                     `;
                     
@@ -1584,6 +1607,11 @@
                     const modal = document.getElementById('videoModal');
                     const content = document.getElementById('videoDetailContent');
                     
+                    // 转义视频内容，防止 XSS 攻击
+                    const safeTitle = escapeHtml(video.title);
+                    const safeSource = escapeHtml(video.source);
+                    const safeDescription = escapeHtml(video.description);
+                    
                     const formatDuration = (seconds) => {
                         const minutes = Math.floor(seconds / 60);
                         const remainingSeconds = seconds % 60;
@@ -1600,18 +1628,18 @@
                     };
                     
                     content.innerHTML = `
-                        <h1>${video.title}</h1>
+                        <h1>${safeTitle}</h1>
                         <div class="news-meta">
-                            <span class="news-source">${video.source}</span>
+                            <span class="news-source">${safeSource}</span>
                             <span class="news-category">👁 ${formatViews(video.viewCount)}</span>
                             <span class="news-time">${video.date}</span>
                             <span class="news-views">时长: ${formatDuration(video.duration)}</span>
                         </div>
                         <div class="news-image">
-                            <img src="${video.thumbnailUrl}" alt="${video.title}">
+                            <img src="${video.thumbnailUrl}" alt="${safeTitle}">
                         </div>
                         <div class="news-content">
-                            <p>${video.description}</p>
+                            <p>${safeDescription}</p>
                         </div>
                         <div class="video-player-placeholder" style="background: #000; padding: 40px; text-align: center; border-radius: 8px; margin-top: 20px;">
                             <p style="color: white; font-size: 18px;">🎬 视频播放器</p>
