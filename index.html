@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>意念科技 - 科技新闻</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* MSN 风格样式 */
+        .msn-app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部导航栏 */
+        .msn-header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .msn-header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .msn-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0078d4;
+        }
+
+        .msn-logo a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .msn-search {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .msn-search input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .msn-search button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .msn-user {
+            display: flex;
+            align-items: center;
+        }
+
+        .msn-signin {
+            color: #0078d4;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid #0078d4;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .msn-signin:hover {
+            background-color: rgba(0, 120, 212, 0.1);
+        }
+
+        /* 导航菜单 */
+        .msn-nav {
+            padding: 0 20px;
+        }
+
+        .msn-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        .msn-nav li a {
+            display: block;
+            padding: 12px 8px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .msn-nav li a:hover {
+            color: #0078d4;
+        }
+
+        /* 主内容区 */
+        .msn-main {
+            display: flex;
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .msn-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* 侧边栏 */
+        .msn-sidebar {
+            width: 300px;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .msn-weather, .msn-links, .msn-trending {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .msn-weather h3, .msn-links h3, .msn-trending h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .weather-content {
+            text-align: center;
+        }
+
+        .weather-city {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .weather-temp {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .weather-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .msn-links ul, .msn-trending ul {
+            list-style: none;
+        }
+
+        .msn-links li, .msn-trending li {
+            margin-bottom: 10px;
+        }
+
+        .msn-links a, .msn-trending a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .msn-links a:hover, .msn-trending a:hover {
+            color: #0078d4;
+        }
+
+        /* 页脚 */
+        .msn-footer {
+            background-color: #f5f5f5;
+            border-top: 1px solid #e0e0e0;
+            margin-top: auto;
+        }
+
+        .msn-footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .msn-footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .msn-footer-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .msn-footer-links a:hover {
+            color: #0078d4;
+        }
+
+        .msn-footer-copyright {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* 新闻列表样式 */
+        .news-list-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .news-header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .news-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .news-item {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-item:hover .news-image img {
+            transform: scale(1.05);
+        }
+
+        .news-content {
+            padding: 15px;
+        }
+
+        .news-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .news-summary {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .news-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .news-source, .news-category, .news-time, .news-views {
+            padding: 2px 8px;
+            background-color: #f0f0f0;
+            border-radius: 12px;
+        }
+
+        /* 视频列表样式 */
+        .video-list-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .video-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .video-header h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .video-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .video-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .video-rank {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 120, 212, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .video-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .video-source, .video-views, .video-date {
+            padding: 2px 8px;
+            background-color: #f0f0f0;
+            border-radius: 12px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .msn-sidebar {
+                width: 250px;
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .msn-header-top {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .msn-search {
+                width: 100%;
+                max-width: none;
+                margin: 0;
+            }
+
+            .msn-nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .msn-nav li a {
+                padding: 8px 6px;
+                font-size: 13px;
+            }
+
+            .msn-main {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .msn-sidebar {
+                width: 100%;
+                min-width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .msn-weather, .msn-links, .msn-trending {
+                flex: 1;
+                min-width: 200px;
+            }
+
+            .news-list {
+                grid-template-columns: 1fr;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .msn-footer-links {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="msn-app">
+        <!-- 顶部导航栏 -->
+        <header class="msn-header">
+            <div class="msn-header-top">
+                <div class="msn-logo">
+                    <a href="#">意念科技</a>
+                </div>
+                <div class="msn-search">
+                    <input type="text" placeholder="搜索网络和资讯" />
+                    <button>搜索</button>
+                </div>
+                <div class="msn-user">
+                    <a href="#" class="msn-signin">登录</a>
+                </div>
+            </div>
+            <nav class="msn-nav">
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">新闻</a></li>
+                    <li><a href="#">视频</a></li>
+                    <li><a href="#">体育</a></li>
+                    <li><a href="#">财经</a></li>
+                    <li><a href="#">娱乐</a></li>
+                    <li><a href="#">科技</a></li>
+                    <li><a href="#">生活</a></li>
+                    <li><a href="#">健康</a></li>
+                    <li><a href="#">更多</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- 主内容区 -->
+        <div class="msn-main">
+            <!-- 左侧内容 -->
+            <main class="msn-content">
+                <div class="news-list-container">
+                    <div class="news-header">
+                        <h1>今日要闻</h1>
+                    </div>
+                    <div class="news-list">
+                        <div class="news-item">
+                            <a href="#" class="news-link">
+                                <div class="news-image">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Windows%2011%20update%20new%20features%20screenshot&image_size=landscape_16_9" alt="微软发布全新Windows 11更新" />
+                                </div>
+                                <div class="news-content">
+                                    <h2 class="news-title">微软发布全新Windows 11更新，带来多项新功能</h2>
+                                    <p class="news-summary">微软今日发布了Windows 11的重大更新，包括全新的任务栏设计、增强的多任务处理能力以及改进的系统性能。</p>
+                                    <div class="news-meta">
+                                        <span class="news-source">微软新闻</span>
+                                        <span class="news-category">科技</span>
+                                        <span class="news-time">2026-03-25 09:00</span>
+                                        <span class="news-views">12345 阅读</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="news-item">
+                            <a href="#" class="news-link">
+                                <div class="news-image">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Tech%20company%20financial%20report%20AI%20growth&image_size=landscape_16_9" alt="全球科技巨头财报季" />
+                                </div>
+                                <div class="news-content">
+                                    <h2 class="news-title">全球科技巨头财报季：AI业务成为增长新引擎</h2>
+                                    <p class="news-summary">多家科技巨头发布财报，AI相关业务成为主要增长动力，股价普遍上涨。</p>
+                                    <div class="news-meta">
+                                        <span class="news-source">财经日报</span>
+                                        <span class="news-category">财经</span>
+                                        <span class="news-time">2026-03-25 08:30</span>
+                                        <span class="news-views">9876 阅读</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="news-item">
+                            <a href="#" class="news-link">
+                                <div class="news-image">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Paris%20Olympic%20Games%202026%20stadium&image_size=landscape_16_9" alt="2026年巴黎奥运会筹备工作" />
+                                </div>
+                                <div class="news-content">
+                                    <h2 class="news-title">2026年巴黎奥运会筹备工作进入最后阶段</h2>
+                                    <p class="news-summary">距离2026年巴黎奥运会开幕仅剩100天，各项筹备工作已进入最后阶段，场馆建设基本完成。</p>
+                                    <div class="news-meta">
+                                        <span class="news-source">体育新闻</span>
+                                        <span class="news-category">体育</span>
+                                        <span class="news-time">2026-03-25 07:45</span>
+                                        <span class="news-views">7654 阅读</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="news-item">
+                            <a href="#" class="news-link">
+                                <div class="news-image">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Electric%20car%20with%20long%20range%201000km&image_size=landscape_16_9" alt="全新电动汽车续航里程突破1000公里" />
+                                </div>
+                                <div class="news-content">
+                                    <h2 class="news-title">全新电动汽车续航里程突破1000公里</h2>
+                                    <p class="news-summary">某知名汽车制造商发布了一款全新电动汽车，续航里程突破1000公里，充电时间大幅缩短。</p>
+                                    <div class="news-meta">
+                                        <span class="news-source">汽车之家</span>
+                                        <span class="news-category">科技</span>
+                                        <span class="news-time">2026-03-24 18:00</span>
+                                        <span class="news-views">5432 阅读</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="news-item">
+                            <a href="#" class="news-link">
+                                <div class="news-image">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Climate%20change%20conference%20world%20leaders&image_size=landscape_16_9" alt="全球气候变化会议在纽约召开" />
+                                </div>
+                                <div class="news-content">
+                                    <h2 class="news-title">全球气候变化会议在纽约召开</h2>
+                                    <p class="news-summary">来自世界各国的领导人齐聚纽约，讨论应对气候变化的具体措施和目标。</p>
+                                    <div class="news-meta">
+                                        <span class="news-source">国际新闻</span>
+                                        <span class="news-category">国际</span>
+                                        <span class="news-time">2026-03-24 15:30</span>
+                                        <span class="news-views">4321 阅读</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="news-item">
+                            <a href="#" class="news-link">
+                                <div class="news-image">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Entertainment%20awards%20ceremony%20celebrities&image_size=landscape_16_9" alt="娱乐圈年度盛典" />
+                                </div>
+                                <div class="news-content">
+                                    <h2 class="news-title">娱乐圈年度盛典：众星云集，精彩不断</h2>
+                                    <p class="news-summary">2026年娱乐圈年度盛典昨晚举行，众多明星亮相，现场星光熠熠。</p>
+                                    <div class="news-meta">
+                                        <span class="news-source">娱乐周刊</span>
+                                        <span class="news-category">娱乐</span>
+                                        <span class="news-time">2026-03-24 12:00</span>
+                                        <span class="news-views">3210 阅读</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-list-container">
+                    <div class="video-header">
+                        <h1>热门视频</h1>
+                        <p>精选来自全球最热门视频网站的顶级视频</p>
+                    </div>
+                    <div class="video-grid">
+                        <div class="video-card">
+                            <a href="#" class="video-link">
+                                <div class="video-thumbnail">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Windows%2011%20new%20features%20tutorial&image_size=landscape_16_9" alt="Windows 11 2026 年最新功能详解" />
+                                    <div class="video-duration">10:00</div>
+                                    <div class="video-rank">#1</div>
+                                </div>
+                                <div class="video-info">
+                                    <h2 class="video-title">Windows 11 2026 年最新功能详解</h2>
+                                    <p class="video-description">详细介绍 Windows 11 2026 年最新更新的所有功能，包括新的任务栏设计、增强的多任务处理能力以及改进的系统性能。</p>
+                                    <div class="video-meta">
+                                        <span class="video-source">微软官方</span>
+                                        <span class="video-views">👁 123K</span>
+                                        <span class="video-date">2026-03-25</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="video-card">
+                            <a href="#" class="video-link">
+                                <div class="video-thumbnail">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=AI%20technology%20changing%20life&image_size=landscape_16_9" alt="AI 如何改变我们的生活" />
+                                    <div class="video-duration">15:00</div>
+                                    <div class="video-rank">#2</div>
+                                </div>
+                                <div class="video-info">
+                                    <h2 class="video-title">AI 如何改变我们的生活</h2>
+                                    <p class="video-description">探讨人工智能技术如何改变我们的日常生活，从工作、学习到娱乐的各个方面。</p>
+                                    <div class="video-meta">
+                                        <span class="video-source">科技前沿</span>
+                                        <span class="video-views">👁 98K</span>
+                                        <span class="video-date">2026-03-24</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="video-card">
+                            <a href="#" class="video-link">
+                                <div class="video-thumbnail">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Paris%20Olympic%20Games%202026%20venues%20tour&image_size=landscape_16_9" alt="2026 巴黎奥运会场馆巡礼" />
+                                    <div class="video-duration">12:00</div>
+                                    <div class="video-rank">#3</div>
+                                </div>
+                                <div class="video-info">
+                                    <h2 class="video-title">2026 巴黎奥运会场馆巡礼</h2>
+                                    <p class="video-description">带你参观 2026 年巴黎奥运会的各个比赛场馆，了解其设计理念和建设过程。</p>
+                                    <div class="video-meta">
+                                        <span class="video-source">体育频道</span>
+                                        <span class="video-views">👁 76K</span>
+                                        <span class="video-date">2026-03-23</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- 右侧边栏 -->
+            <aside class="msn-sidebar">
+                <!-- 天气模块 -->
+                <div class="msn-weather">
+                    <h3>天气</h3>
+                    <div class="weather-content">
+                        <div class="weather-city">北京</div>
+                        <div class="weather-temp">22°C</div>
+                        <div class="weather-desc">晴</div>
+                    </div>
+                </div>
+
+                <!-- 快捷链接 -->
+                <div class="msn-links">
+                    <h3>快捷链接</h3>
+                    <ul>
+                        <li><a href="#">Outlook 邮箱</a></li>
+                        <li><a href="#">Office 365</a></li>
+                        <li><a href="#">OneDrive</a></li>
+                        <li><a href="#">Skype</a></li>
+                    </ul>
+                </div>
+
+                <!-- 热门话题 -->
+                <div class="msn-trending">
+                    <h3>热门话题</h3>
+                    <ul>
+                        <li><a href="#">1. 最新科技动态</a></li>
+                        <li><a href="#">2. 体育赛事报道</a></li>
+                        <li><a href="#">3. 财经市场分析</a></li>
+                        <li><a href="#">4. 娱乐新闻资讯</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="msn-footer">
+            <div class="msn-footer-content">
+                <div class="msn-footer-links">
+                    <a href="#">关于我们</a>
+                    <a href="#">隐私政策</a>
+                    <a href="#">使用条款</a>
+                    <a href="#">联系我们</a>
+                </div>
+                <div class="msn-footer-copyright">
+                    云南意念科技有限责任公司 | 网站版本 v2026.03.26 | 滇ICP备10000001号-1
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 新闻详情模态框 -->
+    <div id="newsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="newsDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- 订阅模态框 -->
+    <div id="subscriptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>订阅计划</h2>
+            <div class="subscription-plans">
+                <div class="plan-card">
+                    <h3>免费版</h3>
+                    <div class="plan-price">¥0<span class="interval">/月</span></div>
+                    <ul class="plan-features">
+                        <li>浏览新闻和视频</li>
+                        <li>基本搜索功能</li>
+                        <li>有限的 API 调用（100次/天）</li>
+                    </ul>
+                    <button class="btn btn-primary">选择</button>
+                </div>
+                <div class="plan-card popular">
+                    <h3>专业版</h3>
+                    <div class="plan-price">¥99<span class="interval">/月</span></div>
+                    <ul class="plan-features">
+                        <li>无广告体验</li>
+                        <li>完整的 API 访问（10,000次/天）</li>
+                        <li>优先技术支持</li>
+                        <li>高级分析工具</li>
+                    </ul>
+                    <button class="btn btn-primary">选择</button>
+                </div>
+                <div class="plan-card">
+                    <h3>企业版</h3>
+                    <div class="plan-price">¥299<span class="interval">/月</span></div>
+                    <ul class="plan-features">
+                        <li>所有专业版功能</li>
+                        <li>无限 API 调用</li>
+                        <li>24/7 技术支持</li>
+                        <li>定制化解决方案</li>
+                    </ul>
+                    <button class="btn btn-primary">选择</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI API Tokens 管理模态框 -->
+    <div id="apiTokensModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>AI API Tokens 管理</h2>
+            <div class="api-tokens">
+                <div class="token-item">
+                    <div class="token-info">
+                        <div class="token-name">默认 Token</div>
+                        <div class="token-value">sk-abcdef1234567890</div>
+                        <div class="token-meta">创建于: 2026-03-25 | 剩余调用: 9,850</div>
+                    </div>
+                    <div class="token-actions">
+                        <button class="btn btn-outline">刷新</button>
+                        <button class="btn btn-outline">删除</button>
+                    </div>
+                </div>
+                <button class="btn btn-primary add-token">添加新 Token</button>
+            </div>
+            <div class="api-usage">
+                <h3>API 使用统计</h3>
+                <div class="usage-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">今日调用</div>
+                        <div class="stat-value">150</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">本月调用</div>
+                        <div class="stat-value">3,250</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">总调用</div>
+                        <div class="stat-value">12,500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 订阅计划样式 */
+        .subscription-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .plan-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .plan-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .plan-card.popular {
+            border-color: #0078d4;
+            box-shadow: 0 0 10px rgba(0,120,212,0.2);
+        }
+
+        .plan-price {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .plan-price .interval {
+            font-size: 14px;
+            font-weight: normal;
+            color: #666;
+        }
+
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* API Tokens 样式 */
+        .api-tokens {
+            margin: 20px 0;
+        }
+
+        .token-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .token-value {
+            font-family: monospace;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .token-meta {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .api-usage {
+            margin-top: 30px;
+        }
+
+        .usage-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #0078d4;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #005a9e;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #0078d4;
+            border: 1px solid #0078d4;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(0,120,212,0.1);
+        }
+
+        .add-token {
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        /* 新闻详情样式 */
+        #newsDetailContent {
+            padding: 20px 0;
+        }
+
+        #newsDetailContent h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #newsDetailContent .news-meta {
+            margin-bottom: 20px;
+        }
+
+        #newsDetailContent .news-image {
+            margin: 20px 0;
+        }
+
+        #newsDetailContent .news-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        #newsDetailContent .news-content {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        #newsDetailContent .news-content p {
+            margin-bottom: 15px;
+        }
+    </style>
+
+    <script>
+        // 新闻数据
+        const newsData = [
+            {
+                id: '1',
+                title: '微软发布全新Windows 11更新，带来多项新功能',
+                summary: '微软今日发布了Windows 11的重大更新，包括全新的任务栏设计、增强的多任务处理能力以及改进的系统性能。',
+                content: `微软今日正式发布了Windows 11的重大更新，版本号为24H2。此次更新带来了多项新功能和改进，旨在提升用户体验和系统性能。\n\n全新的任务栏设计是本次更新的亮点之一，用户现在可以根据自己的喜好自定义任务栏的位置和大小，支持更灵活的布局。\n\n增强的多任务处理能力包括改进的Snap布局功能，现在可以支持更多的窗口排列方式，提高工作效率。\n\n系统性能方面，微软优化了启动速度和应用加载时间，使系统运行更加流畅。此外，还改进了电池管理，延长了笔记本电脑的续航时间。\n\n安全方面，本次更新加强了系统的安全性，包括更强大的防火墙和防病毒功能，保护用户的设备和数据安全。\n\n微软表示，此次更新将逐步推送给所有Windows 11用户，用户可以通过Windows Update检查并安装更新。`,
+                imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Windows%2011%20update%20new%20features%20screenshot&image_size=landscape_16_9',
+                source: '微软新闻',
+                category: '科技',
+                time: '2026-03-25 09:00',
+                views: 12345
+            },
+            {
+                id: '2',
+                title: '全球科技巨头财报季：AI业务成为增长新引擎',
+                summary: '多家科技巨头发布财报，AI相关业务成为主要增长动力，股价普遍上涨。',
+                content: `随着全球科技巨头陆续发布2026财年第一季度财报，AI业务成为了最大的亮点。多家公司的AI相关业务收入实现了两位数甚至三位数的增长，成为推动整体业绩的主要动力。\n\n微软财报显示，其AI业务收入同比增长了85%，主要来自于Azure云服务中的AI功能和Copilot产品的订阅收入。亚马逊的AWS云服务中，AI相关服务收入也增长了72%。\n\n谷歌母公司Alphabet的AI业务收入增长了68%，主要来自于搜索和云服务中的AI功能。苹果公司虽然没有单独披露AI业务收入，但表示AI功能的引入使得iPhone和Mac的销量有所提升。\n\n分析师认为，AI技术的商业化正在加速，企业和消费者对AI工具的需求不断增长，这将继续推动科技公司的业绩增长。\n\n受财报利好影响，科技股普遍上涨，纳斯达克指数创下历史新高。`,
+                imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Tech%20company%20financial%20report%20AI%20growth&image_size=landscape_16_9',
+                source: '财经日报',
+                category: '财经',
+                time: '2026-03-25 08:30',
+                views: 9876
+            },
+            {
+                id: '3',
+                title: '2026年巴黎奥运会筹备工作进入最后阶段',
+                summary: '距离2026年巴黎奥运会开幕仅剩100天，各项筹备工作已进入最后阶段，场馆建设基本完成。',
+                content: `距离2026年巴黎奥运会开幕仅剩100天，各项筹备工作已进入最后阶段。巴黎奥组委今日召开新闻发布会，通报了筹备工作的最新进展。\n\n据介绍，所有比赛场馆的建设已经基本完成，正在进行最后的设备安装和调试。主体育场法兰西体育场已经完成了翻修工作，将作为开幕式和闭幕式的举办场地。\n\n交通方面，巴黎已经完成了公共交通系统的升级，增加了地铁和公交的运力，以应对奥运会期间的大客流。此外，还新建了多条奥运专线，连接各个比赛场馆。\n\n安保方面，法国政府已经制定了详细的安保计划，将投入大量警力和安保设备，确保奥运会的安全举办。\n\n巴黎奥组委表示，目前已经售出了超过80%的门票，预计最终门票销售额将达到12亿欧元。\n\n2026年巴黎奥运会将于7月26日至8月11日举行，预计将有来自206个国家和地区的约10500名运动员参加。`,
+                imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Paris%20Olympic%20Games%202026%20stadium&image_size=landscape_16_9',
+                source: '体育新闻',
+                category: '体育',
+                time: '2026-03-25 07:45',
+                views: 7654
+            },
+            {
+                id: '4',
+                title: '全新电动汽车续航里程突破1000公里',
+                summary: '某知名汽车制造商发布了一款全新电动汽车，续航里程突破1000公里，充电时间大幅缩短。',
+                content: `今日，某知名汽车制造商发布了一款全新电动汽车，续航里程突破1000公里，成为行业内的里程碑事件。\n\n这款新车采用了最新的电池技术，能量密度比传统电池提高了30%，同时重量减轻了20%。这使得车辆在单次充电后可以行驶超过1000公里，大大缓解了用户的里程焦虑。\n\n此外，新车还支持超快充技术，充电10分钟即可行驶300公里，完全充满电仅需30分钟。这一技术的突破将极大地提升电动汽车的使用便利性。\n\n车辆还配备了先进的自动驾驶系统，支持L3级别的自动驾驶，可以在高速公路等特定场景下实现完全自动驾驶。\n\n价格方面，新车的起售价为人民币30万元，预计将于今年下半年开始交付。分析师认为，这款车的发布将进一步加速电动汽车对传统燃油车的替代。`,
+                imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Electric%20car%20with%20long%20range%201000km&image_size=landscape_16_9',
+                source: '汽车之家',
+                category: '科技',
+                time: '2026-03-24 18:00',
+                views: 5432
+            },
+            {
+                id: '5',
+                title: '全球气候变化会议在纽约召开',
+                summary: '来自世界各国的领导人齐聚纽约，讨论应对气候变化的具体措施和目标。',
+                content: `来自世界各国的领导人齐聚纽约，参加第28届联合国气候变化大会。本次大会的主题是"加速行动，应对气候变化"。\n\n会议期间，各国领导人将讨论如何进一步减少温室气体排放，提高可再生能源的使用比例，以及如何帮助发展中国家应对气候变化带来的挑战。\n\n联合国秘书长在开幕式上表示，气候变化已经成为人类面临的最紧迫挑战之一，需要各国采取更加积极的行动。他呼吁各国政府、企业和公民社会共同努力，实现碳中和目标。\n\n会议预计将持续两周，期间将举行多场部长级会议和专题讨论。各国代表将就气候变化的各个方面进行深入讨论，并寻求达成新的国际协议。\n\n专家表示，本次会议的成果将对全球气候变化政策产生重要影响，有望推动全球在应对气候变化方面采取更加一致和有效的行动。`,
+                imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Climate%20change%20conference%20world%20leaders&image_size=landscape_16_9',
+                source: '国际新闻',
+                category: '国际',
+                time: '2026-03-24 15:30',
+                views: 4321
+            },
+            {
+                id: '6',
+                title: '娱乐圈年度盛典：众星云集，精彩不断',
+                summary: '2026年娱乐圈年度盛典昨晚举行，众多明星亮相，现场星光熠熠。',
+                content: `2026年娱乐圈年度盛典昨晚在上海举行，众多明星亮相红毯，现场星光熠熠。\n\n本次盛典共颁发了包括最佳电影、最佳电视剧、最佳男女演员等在内的20个奖项。知名演员张艺谋凭借其执导的电影《归来》获得最佳导演奖，演员周冬雨和易烊千玺分别获得最佳男女演员奖。\n\n盛典现场还进行了多场精彩的表演，包括歌手周杰伦的《稻香》、陈奕迅的《浮夸》等经典歌曲的演唱，以及舞蹈团体的精彩表演。\n\n此外，盛典还特别设置了"年度公益人物"奖项，表彰在公益事业方面做出突出贡献的艺人。演员赵丽颖凭借其在教育公益方面的贡献获得了这一奖项。\n\n本次盛典通过多个平台进行了直播，吸引了超过1亿观众观看。业内人士表示，本次盛典不仅是对娱乐圈一年来成果的总结，也是对未来发展的展望。`,
+                imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Entertainment%20awards%20ceremony%20celebrities&image_size=landscape_16_9',
+                source: '娱乐周刊',
+                category: '娱乐',
+                time: '2026-03-24 12:00',
+                views: 3210
+            }
+        ];
+
+        // 搜索功能
+        document.querySelector('.msn-search button').addEventListener('click', function() {
+            const searchInput = document.querySelector('.msn-search input');
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm) {
+                alert(`搜索: ${searchTerm}`);
+                // 这里可以添加实际的搜索逻辑
+            }
+        });
+
+        // 点击新闻标题查看详情
+        document.querySelectorAll('.news-title').forEach((title, index) => {
+            title.addEventListener('click', function(e) {
+                e.preventDefault();
+                const newsId = (index + 1).toString();
+                const news = newsData.find(item => item.id === newsId);
+                if (news) {
+                    const modal = document.getElementById('newsModal');
+                    const content = document.getElementById('newsDetailContent');
+                    
+                    content.innerHTML = `
+                        <h1>${news.title}</h1>
+                        <div class="news-meta">
+                            <span class="news-source">${news.source}</span>
+                            <span class="news-category">${news.category}</span>
+                            <span class="news-time">${news.time}</span>
+                            <span class="news-views">${news.views} 阅读</span>
+                        </div>
+                        <div class="news-image">
+                            <img src="${news.imageUrl}" alt="${news.title}">
+                        </div>
+                        <div class="news-content">
+                            ${news.content.split('\n').map(paragraph => `<p>${paragraph}</p>`).join('')}
+                        </div>
+                    `;
+                    
+                    modal.style.display = 'block';
+                }
+            });
+        });
+
+        // 关闭模态框
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                modal.style.display = 'none';
+            });
+        });
+
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // 添加订阅和API Tokens链接到导航栏
+        const navUl = document.querySelector('.msn-nav ul');
+        const subscriptionLi = document.createElement('li');
+        subscriptionLi.innerHTML = '<a href="#" id="subscriptionLink">订阅</a>';
+        navUl.appendChild(subscriptionLi);
+
+        const apiTokensLi = document.createElement('li');
+        apiTokensLi.innerHTML = '<a href="#" id="apiTokensLink">API Tokens</a>';
+        navUl.appendChild(apiTokensLi);
+
+        // 订阅链接点击事件
+        document.getElementById('subscriptionLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('subscriptionModal').style.display = 'block';
+        });
+
+        // API Tokens链接点击事件
+        document.getElementById('apiTokensLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('apiTokensModal').style.display = 'block';
+        });
+
+        // 订阅按钮点击事件
+        document.querySelectorAll('.plan-card button').forEach(button => {
+            button.addEventListener('click', function() {
+                const planName = this.closest('.plan-card').querySelector('h3').textContent;
+                alert(`您选择了 ${planName} 计划`);
+                // 这里可以添加实际的订阅逻辑
+            });
+        });
+
+        // 添加新Token按钮点击事件
+        document.querySelector('.add-token').addEventListener('click', function() {
+            alert('添加新Token');
+            // 这里可以添加实际的添加Token逻辑
+        });
+
+        // Token操作按钮点击事件
+        document.querySelectorAll('.token-actions button').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.textContent.trim();
+                alert(`${action} Token`);
+                // 这里可以添加实际的Token操作逻辑
+            });
+        });
+    </script>
+</body>
+</html>
