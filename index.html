@@ -3,7 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>意念科技 - 科技新闻</title>
+    <meta name="description" content="意念科技 - 您的科技新闻门户，提供最新科技资讯、财经动态、体育赛事、娱乐新闻等全方位信息服务">
+    <meta name="keywords" content="意念科技,科技新闻,财经新闻,体育新闻,娱乐新闻,AI,人工智能,云计算">
+    <meta name="author" content="云南意念科技有限责任公司">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / 社交媒体分享 -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://13888285815.github.io/news/">
+    <meta property="og:title" content="意念科技 - 科技新闻门户">
+    <meta property="og:description" content="您的科技新闻门户，提供最新科技资讯、财经动态、体育赛事、娱乐新闻等全方位信息服务">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=意念科技">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="意念科技 - 科技新闻门户">
+    <meta name="twitter:description" content="您的科技新闻门户，提供最新科技资讯、财经动态、体育赛事、娱乐新闻等全方位信息服务">
+    
+    <!-- 网站图标 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    
+    <!-- 主题颜色 -->
+    <meta name="theme-color" content="#0078d4">
+    
+    <title>意念科技 - 科技新闻门户</title>
     <style>
         /* 全局样式 */
         * {
@@ -103,6 +127,169 @@
 
         .msn-signin:hover {
             background-color: rgba(0, 120, 212, 0.1);
+        }
+        
+        /* 深色模式样式 */
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .msn-header {
+            background-color: #2d2d2d;
+            border-bottom-color: #404040;
+        }
+        
+        .dark-mode .msn-logo {
+            color: #4da6ff;
+        }
+        
+        .dark-mode .msn-search input {
+            background-color: #3d3d3d;
+            border-color: #505050;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .msn-search button {
+            background-color: #4da6ff;
+        }
+        
+        .dark-mode .msn-signin {
+            color: #4da6ff;
+            border-color: #4da6ff;
+        }
+        
+        .dark-mode .msn-signin:hover {
+            background-color: rgba(77, 166, 255, 0.1);
+        }
+        
+        .dark-mode .msn-nav li a {
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .msn-nav li a:hover {
+            color: #4da6ff;
+        }
+        
+        .dark-mode .msn-weather,
+        .dark-mode .msn-links,
+        .dark-mode .msn-trending {
+            background-color: #2d2d2d;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark-mode .msn-weather h3,
+        .dark-mode .msn-links h3,
+        .dark-mode .msn-trending h3 {
+            color: #e0e0e0;
+            border-bottom-color: #404040;
+        }
+        
+        .dark-mode .weather-city,
+        .dark-mode .weather-desc {
+            color: #b0b0b0;
+        }
+        
+        .dark-mode .weather-temp {
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .msn-links a,
+        .dark-mode .msn-trending a {
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .msn-links a:hover,
+        .dark-mode .msn-trending a:hover {
+            color: #4da6ff;
+        }
+        
+        .dark-mode .msn-footer {
+            background-color: #2d2d2d;
+            border-top-color: #404040;
+        }
+        
+        .dark-mode .msn-footer-links a {
+            color: #b0b0b0;
+        }
+        
+        .dark-mode .msn-footer-links a:hover {
+            color: #4da6ff;
+        }
+        
+        .dark-mode .msn-footer-copyright {
+            color: #808080;
+        }
+        
+        .dark-mode .news-list-container,
+        .dark-mode .video-list-container {
+            background-color: #2d2d2d;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark-mode .news-header h1,
+        .dark-mode .video-header h1 {
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .news-header,
+        .dark-mode .video-header {
+            border-bottom-color: #404040;
+        }
+        
+        .dark-mode .news-item,
+        .dark-mode .video-card {
+            background-color: #3d3d3d;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark-mode .news-title,
+        .dark-mode .video-title {
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .news-summary,
+        .dark-mode .news-meta,
+        .dark-mode .video-description,
+        .dark-mode .video-meta {
+            color: #b0b0b0;
+        }
+        
+        .dark-mode .news-source,
+        .dark-mode .news-category,
+        .dark-mode .news-time,
+        .dark-mode .news-views,
+        .dark-mode .video-source,
+        .dark-mode .video-views,
+        .dark-mode .video-date {
+            background-color: #505050;
+        }
+        
+        /* 深色模式切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+        
+        .dark-mode .theme-toggle {
+            background-color: #4da6ff;
         }
 
         /* 导航菜单 */
@@ -779,10 +966,11 @@
                 <div class="msn-trending">
                     <h3>热门话题</h3>
                     <ul>
-                        <li><a href="#">1. 最新科技动态</a></li>
-                        <li><a href="#">2. 体育赛事报道</a></li>
-                        <li><a href="#">3. 财经市场分析</a></li>
-                        <li><a href="#">4. 娱乐新闻资讯</a></li>
+                        <li><a href="#" onclick="showTrendingTopic('ai')">🔥 AI 人工智能</a></li>
+                        <li><a href="#" onclick="showTrendingTopic('cloud')">☁️ 云计算技术</a></li>
+                        <li><a href="#" onclick="showTrendingTopic('ev')">🚗 新能源汽车</a></li>
+                        <li><a href="#" onclick="showTrendingTopic('metaverse')">🌐 元宇宙探索</a></li>
+                        <li><a href="#" onclick="showTrendingTopic('blockchain')">⛓️ 区块链应用</a></li>
                     </ul>
                 </div>
             </aside>
@@ -802,6 +990,11 @@
                 </div>
             </div>
         </footer>
+        
+        <!-- 深色模式切换按钮 -->
+        <button class="theme-toggle" id="themeToggle" title="切换深色模式">
+            🌙
+        </button>
     </div>
 
     <!-- 新闻详情模态框 -->
@@ -890,6 +1083,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- 视频详情模态框 -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="videoDetailContent"></div>
         </div>
     </div>
 
@@ -1181,14 +1382,162 @@
                 views: 3210
             }
         ];
+        
+        // 视频数据
+        const videoData = [
+            {
+                id: '1',
+                title: 'Windows 11 2026 年最新功能详解',
+                description: '详细介绍 Windows 11 2026 年最新更新的所有功能，包括新的任务栏设计、增强的多任务处理能力以及改进的系统性能。',
+                thumbnailUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Windows%2011%20new%20features%20tutorial&image_size=landscape_16_9',
+                url: '#',
+                duration: 600,
+                source: '微软官方',
+                sourceRank: 1,
+                viewCount: 123456,
+                date: '2026-03-25'
+            },
+            {
+                id: '2',
+                title: 'AI 如何改变我们的生活',
+                description: '探讨人工智能技术如何改变我们的日常生活，从工作、学习到娱乐的各个方面。',
+                thumbnailUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=AI%20technology%20changing%20life&image_size=landscape_16_9',
+                url: '#',
+                duration: 900,
+                source: '科技前沿',
+                sourceRank: 2,
+                viewCount: 98765,
+                date: '2026-03-24'
+            },
+            {
+                id: '3',
+                title: '2026 巴黎奥运会场馆巡礼',
+                description: '带你参观 2026 年巴黎奥运会的各个比赛场馆，了解其设计理念和建设过程。',
+                thumbnailUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Paris%20Olympic%20Games%202026%20venues%20tour&image_size=landscape_16_9',
+                url: '#',
+                duration: 720,
+                source: '体育频道',
+                sourceRank: 3,
+                viewCount: 76543,
+                date: '2026-03-23'
+            },
+            {
+                id: '4',
+                title: '全新电动汽车技术解析',
+                description: '解析最新的电动汽车技术，包括电池技术、充电技术以及自动驾驶技术的发展。',
+                thumbnailUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Electric%20car%20technology%20explained&image_size=landscape_16_9',
+                url: '#',
+                duration: 840,
+                source: '汽车科技',
+                sourceRank: 4,
+                viewCount: 54321,
+                date: '2026-03-22'
+            },
+            {
+                id: '5',
+                title: '全球气候变化与我们的未来',
+                description: '探讨全球气候变化的现状、原因以及我们可以采取的应对措施。',
+                thumbnailUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Climate%20change%20global%20future&image_size=landscape_16_9',
+                url: '#',
+                duration: 1080,
+                source: '环境频道',
+                sourceRank: 5,
+                viewCount: 43210,
+                date: '2026-03-21'
+            },
+            {
+                id: '6',
+                title: '2026 娱乐圈年度盛典精彩回顾',
+                description: '回顾 2026 年娱乐圈年度盛典的精彩瞬间，包括明星走红毯、颁奖典礼以及精彩表演。',
+                thumbnailUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Entertainment%20awards%20ceremony%20highlights&image_size=landscape_16_9',
+                url: '#',
+                duration: 1200,
+                source: '娱乐频道',
+                sourceRank: 6,
+                viewCount: 32109,
+                date: '2026-03-20'
+            }
+        ];
 
         // 搜索功能
         document.querySelector('.msn-search button').addEventListener('click', function() {
             const searchInput = document.querySelector('.msn-search input');
-            const searchTerm = searchInput.value.trim();
+            const searchTerm = searchInput.value.trim().toLowerCase();
             if (searchTerm) {
-                alert(`搜索: ${searchTerm}`);
-                // 这里可以添加实际的搜索逻辑
+                // 搜索新闻
+                const newsResults = newsData.filter(news => 
+                    news.title.toLowerCase().includes(searchTerm) || 
+                    news.summary.toLowerCase().includes(searchTerm) ||
+                    news.content.toLowerCase().includes(searchTerm) ||
+                    news.category.toLowerCase().includes(searchTerm)
+                );
+                
+                // 搜索视频
+                const videoResults = videoData.filter(video => 
+                    video.title.toLowerCase().includes(searchTerm) || 
+                    video.description.toLowerCase().includes(searchTerm) ||
+                    video.source.toLowerCase().includes(searchTerm)
+                );
+                
+                // 显示搜索结果
+                const modal = document.getElementById('newsModal');
+                const content = document.getElementById('newsDetailContent');
+                
+                let resultsHtml = `<h1>搜索结果: "${searchInput.value}"</h1>`;
+                resultsHtml += `<p style="margin: 10px 0 20px; color: #666;">找到 ${newsResults.length} 条新闻和 ${videoResults.length} 个视频</p>`;
+                
+                if (newsResults.length > 0) {
+                    resultsHtml += '<h2 style="margin: 20px 0 15px; font-size: 18px;">📰 相关新闻</h2>';
+                    newsResults.forEach(news => {
+                        resultsHtml += `
+                            <div style="background: #f9f9f9; padding: 15px; margin-bottom: 15px; border-radius: 8px; cursor: pointer;" onclick="showNewsDetail('${news.id}')">
+                                <h3 style="font-size: 16px; margin-bottom: 8px; color: #333;">${news.title}</h3>
+                                <p style="font-size: 14px; color: #666; margin-bottom: 8px;">${news.summary}</p>
+                                <div style="font-size: 12px; color: #999;">
+                                    <span style="margin-right: 10px;">${news.source}</span>
+                                    <span style="margin-right: 10px;">${news.category}</span>
+                                    <span>${news.time}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                if (videoResults.length > 0) {
+                    resultsHtml += '<h2 style="margin: 20px 0 15px; font-size: 18px;">🎬 相关视频</h2>';
+                    videoResults.forEach(video => {
+                        resultsHtml += `
+                            <div style="background: #f9f9f9; padding: 15px; margin-bottom: 15px; border-radius: 8px; cursor: pointer;" onclick="showVideoDetail('${video.id}')">
+                                <h3 style="font-size: 16px; margin-bottom: 8px; color: #333;">${video.title}</h3>
+                                <p style="font-size: 14px; color: #666; margin-bottom: 8px;">${video.description}</p>
+                                <div style="font-size: 12px; color: #999;">
+                                    <span style="margin-right: 10px;">${video.source}</span>
+                                    <span style="margin-right: 10px;">👁 ${video.viewCount}</span>
+                                    <span>${video.date}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                if (newsResults.length === 0 && videoResults.length === 0) {
+                    resultsHtml += `
+                        <div style="text-align: center; padding: 40px; color: #666;">
+                            <p style="font-size: 18px; margin-bottom: 10px;">未找到相关内容</p>
+                            <p style="font-size: 14px;">请尝试其他关键词</p>
+                        </div>
+                    `;
+                }
+                
+                content.innerHTML = resultsHtml;
+                modal.style.display = 'block';
+            }
+        });
+        
+        // 支持回车键搜索
+        document.querySelector('.msn-search input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.msn-search button').click();
             }
         });
 
@@ -1215,6 +1564,59 @@
                         </div>
                         <div class="news-content">
                             ${news.content.split('\n').map(paragraph => `<p>${paragraph}</p>`).join('')}
+                        </div>
+                    `;
+                    
+                    modal.style.display = 'block';
+                }
+            });
+        });
+        
+        // 点击视频标题查看详情
+        document.querySelectorAll('.video-title').forEach((title, index) => {
+            title.addEventListener('click', function(e) {
+                e.preventDefault();
+                const videoId = (index + 1).toString();
+                const video = videoData.find(item => item.id === videoId);
+                if (video) {
+                    const modal = document.getElementById('videoModal');
+                    const content = document.getElementById('videoDetailContent');
+                    
+                    const formatDuration = (seconds) => {
+                        const minutes = Math.floor(seconds / 60);
+                        const remainingSeconds = seconds % 60;
+                        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+                    };
+                    
+                    const formatViews = (views) => {
+                        if (views >= 1000000) {
+                            return `${(views / 1000000).toFixed(1)}M`;
+                        } else if (views >= 1000) {
+                            return `${(views / 1000).toFixed(1)}K`;
+                        }
+                        return views.toString();
+                    };
+                    
+                    content.innerHTML = `
+                        <h1>${video.title}</h1>
+                        <div class="news-meta">
+                            <span class="news-source">${video.source}</span>
+                            <span class="news-category">👁 ${formatViews(video.viewCount)}</span>
+                            <span class="news-time">${video.date}</span>
+                            <span class="news-views">时长: ${formatDuration(video.duration)}</span>
+                        </div>
+                        <div class="news-image">
+                            <img src="${video.thumbnailUrl}" alt="${video.title}">
+                        </div>
+                        <div class="news-content">
+                            <p>${video.description}</p>
+                        </div>
+                        <div class="video-player-placeholder" style="background: #000; padding: 40px; text-align: center; border-radius: 8px; margin-top: 20px;">
+                            <p style="color: white; font-size: 18px;">🎬 视频播放器</p>
+                            <p style="color: #999; font-size: 14px; margin-top: 10px;">点击播放按钮开始观看</p>
+                            <button style="margin-top: 20px; padding: 12px 30px; background: #0078d4; color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 16px;">
+                                ▶ 播放视频
+                            </button>
                         </div>
                     `;
                     
@@ -1283,6 +1685,93 @@
                 // 这里可以添加实际的Token操作逻辑
             });
         });
+        
+        // 热门话题功能
+        function showTrendingTopic(topic) {
+            const topicData = {
+                'ai': {
+                    title: 'AI 人工智能',
+                    description: '人工智能（AI）正在改变我们的生活方式。从智能助手到自动驾驶，从医疗诊断到金融分析，AI 技术正在各个领域展现出巨大的潜力。',
+                    news: newsData.filter(n => n.category === '科技' || n.title.includes('AI'))
+                },
+                'cloud': {
+                    title: '云计算技术',
+                    description: '云计算技术正在推动企业数字化转型。阿里云、腾讯云、华为云等国内云服务商正在为企业提供强大的计算能力和存储服务。',
+                    news: newsData.filter(n => n.title.includes('云') || n.title.includes('科技'))
+                },
+                'ev': {
+                    title: '新能源汽车',
+                    description: '新能源汽车行业正在快速发展。电动汽车、混合动力汽车和氢燃料电池汽车正在改变传统汽车产业格局。',
+                    news: newsData.filter(n => n.title.includes('汽车') || n.title.includes('电动'))
+                },
+                'metaverse': {
+                    title: '元宇宙探索',
+                    description: '元宇宙是下一代互联网的重要发展方向。虚拟现实、增强现实和区块链技术正在构建全新的数字世界。',
+                    news: newsData.filter(n => n.category === '科技')
+                },
+                'blockchain': {
+                    title: '区块链应用',
+                    description: '区块链技术正在从加密货币扩展到更广泛的应用领域。供应链管理、数字身份认证、智能合约等应用正在落地。',
+                    news: newsData.filter(n => n.title.includes('区块链') || n.title.includes('科技'))
+                }
+            };
+            
+            const topicInfo = topicData[topic];
+            if (topicInfo) {
+                const modal = document.getElementById('newsModal');
+                const content = document.getElementById('newsDetailContent');
+                
+                let html = `
+                    <h1>${topicInfo.title}</h1>
+                    <p style="margin: 15px 0; color: #666; line-height: 1.6;">${topicInfo.description}</p>
+                    <h2 style="margin: 20px 0 15px; font-size: 18px;">相关新闻</h2>
+                `;
+                
+                if (topicInfo.news.length > 0) {
+                    topicInfo.news.forEach(news => {
+                        html += `
+                            <div style="background: #f9f9f9; padding: 15px; margin-bottom: 15px; border-radius: 8px; cursor: pointer;" onclick="showNewsDetail('${news.id}')">
+                                <h3 style="font-size: 16px; margin-bottom: 8px; color: #333;">${news.title}</h3>
+                                <p style="font-size: 14px; color: #666; margin-bottom: 8px;">${news.summary}</p>
+                                <div style="font-size: 12px; color: #999;">
+                                    <span style="margin-right: 10px;">${news.source}</span>
+                                    <span>${news.time}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    html += '<p style="color: #666; text-align: center; padding: 20px;">暂无相关新闻</p>';
+                }
+                
+                content.innerHTML = html;
+                modal.style.display = 'block';
+            }
+        }
+        
+        // 深色模式切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // 检查本地存储中的主题设置
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            }
+        });
+
     </script>
 </body>
 </html>
