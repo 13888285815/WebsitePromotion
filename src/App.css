@@ -471,6 +471,145 @@ body {
   border-radius: 12px;
 }
 
+/* 推广页面样式 */
+.promotion-page {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.promotion-page h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.promotion-page p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.promotion-form {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #0078d4;
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.1);
+}
+
+.promotion-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.promotion-btn:hover {
+  background-color: #005a9e;
+}
+
+.promotion-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.status-message {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  padding: 15px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-message.success {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.status-message.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+.promotion-info {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.promotion-info h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.promotion-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.promotion-info li {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.promotion-info li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #0078d4;
+  font-weight: 700;
+}
+
 /* 响应式设计 */
 @media (max-width: 1024px) {
   .msn-sidebar {
@@ -525,6 +664,14 @@ body {
 
   .video-grid {
     grid-template-columns: 1fr;
+  }
+
+  .promotion-page {
+    padding: 20px;
+  }
+
+  .promotion-form {
+    padding: 15px;
   }
 
   .msn-footer-links {

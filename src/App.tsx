@@ -7,6 +7,7 @@ import VideoDetail from './pages/VideoDetail'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Subscription from './pages/Subscription'
+import Promotion from './pages/Promotion'
 import { AuthProvider } from './utils/auth'
 import './App.css'
 
@@ -34,6 +35,7 @@ function App() {
                 <li><a href="/">首页</a></li>
                 <li><a href="/news">新闻</a></li>
                 <li><a href="/videos">视频</a></li>
+                <li><a href="/promotion">推广</a></li>
                 <li><a href="#">体育</a></li>
                 <li><a href="#">财经</a></li>
                 <li><a href="#">娱乐</a></li>
@@ -57,6 +59,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/subscription" element={<Subscription />} />
+                <Route path="/promotion" element={<Promotion />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
