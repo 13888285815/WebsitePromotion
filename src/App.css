@@ -610,6 +610,59 @@ body {
   font-weight: 700;
 }
 
+/* 语言选择器样式 */
+.language-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.lang-btn {
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+  background-color: #f5f5f5;
+  border-color: #0078d4;
+}
+
+.lang-btn.active {
+  background-color: #0078d4;
+  color: white;
+  border-color: #0078d4;
+}
+
+/* 加载样式 */
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #666;
+}
+
+/* RTL (从右到左) 支持 - 阿拉伯语 */
+.promotion-page.rtl {
+  direction: rtl;
+}
+
+.promotion-page.rtl .promotion-info li {
+  padding-left: 0;
+  padding-right: 20px;
+}
+
+.promotion-page.rtl .promotion-info li:before {
+  left: auto;
+  right: 0;
+}
+
 /* 响应式设计 */
 @media (max-width: 1024px) {
   .msn-sidebar {
