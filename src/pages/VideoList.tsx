@@ -17,7 +17,6 @@ interface VideoItem {
 const VideoList: React.FC = () => {
   const [videos, setVideos] = useState<VideoItem[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     // 模拟获取视频数据
@@ -118,10 +117,6 @@ const VideoList: React.FC = () => {
 
   if (loading) {
     return <div className="loading">加载中...</div>
-  }
-
-  if (error) {
-    return <div className="error">{error}</div>
   }
 
   return (

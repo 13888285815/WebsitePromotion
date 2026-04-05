@@ -15,7 +15,6 @@ interface NewsItem {
 const NewsList: React.FC = () => {
   const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     // 模拟获取新闻数据
@@ -89,10 +88,6 @@ const NewsList: React.FC = () => {
 
   if (loading) {
     return <div className="loading">加载中...</div>
-  }
-
-  if (error) {
-    return <div className="error">{error}</div>
   }
 
   return (
